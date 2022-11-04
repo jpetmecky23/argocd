@@ -1,37 +1,21 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: codedabbler
+  name: guestbook-ui
 spec:
-  replicas: 2
+  replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: codedabbler
+      app: guestbook-ui
   template:
     metadata:
       labels:
-        app: codedabbler
+        app: guestbook-ui
     spec:
       containers:
-        - name: codedabbler
-          image: localhost:5000/codedabbler
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 80
-      restartPolicy: Always
-
----
-
-kind: Service
-apiVersion: v1
-metadata:
-  name: codedabbler
-spec:
-  type: NodePort
-  ports:
-    - port: 80
-      targetPort: 80
-      protocol: TCP
-      nodePort: 31000
-  selector:
-    app: codedabbler
+      - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
+        name: guestbook-ui
+        ports:
+        - containerPort: 80
