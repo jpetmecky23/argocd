@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: codedabbler
 spec:
-  replicas: 2
+  replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: codedabbler
@@ -13,9 +14,7 @@ spec:
         app: codedabbler
     spec:
       containers:
-        - name: codedabbler
-          image: localhost:5000/codedabbler
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 80
-      restartPolicy: Always
+      - image: localhost:5000/codedabbler
+        name: codedabbler
+        ports:
+        - containerPort: 80
