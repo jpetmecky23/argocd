@@ -15,7 +15,7 @@ spec:
         app: codedabbler
     spec:
       containers:
-      - image: localhost:5000/codedabbler
+      - image: 172.18.0.1:5000/codedabbler
         name: codedabbler
         ports:
         - containerPort: 80
